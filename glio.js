@@ -1,5 +1,4 @@
-;
-(function(window, document, navigator) {
+;(function(window, document, navigator) {
   'use strict';
   let glio = {
     // glio status
