@@ -1,5 +1,12 @@
 ;(function(window, document, navigator) {
   'use strict';
+  const TOP_LEFT = 'top-left';
+  const TOP_RIGHT = 'top-right';
+  const BOTTOM_LEFT = 'bottom-left';
+  const BOTTOM_RIGHT = 'bottom-right';
+  const ACTIVE = 'active';
+  const INACTIVE = 'inactive';
+
   let glio = {
     // glio status
     statusTopLeft: 'inactive',
@@ -12,14 +19,14 @@
         document.body.addEventListener('mousemove', (event) => {
           let pointX = event.pageX,
               pointY = event.pageY,
-              isTopLeftInactive = glio.getDirection(direction, 'top-left')
-                                  && (glio.statusTopLeft === 'inactive'),
-              isTopRightInactive = glio.getDirection(direction, 'top-right')
-                                   && (glio.statusTopRight === 'inactive'),
-              isBottomRightInactive = glio.getDirection(direction, 'bottom-right')
-                                      && (glio.statusBottomRight === 'inactive'),
-              isBottomLeftInactive = glio.getDirection(direction, 'bottom-left')
-                                     && (glio.statusBottomLeft === 'inactive');
+              isTopLeftInactive = glio.getDirection(direction, TOP_LEFT)
+                                  && (glio.statusTopLeft === INACTIVE),
+              isTopRightInactive = glio.getDirection(direction, TOP_RIGHT)
+                                   && (glio.statusTopRight === INACTIVE),
+              isBottomRightInactive = glio.getDirection(direction, BOTTOM_RIGHT)
+                                      && (glio.statusBottomRight === INACTIVE),
+              isBottomLeftInactive = glio.getDirection(direction, BOTTOM_LEFT)
+                                     && (glio.statusBottomLeft === INACTIVE);
           if (isTopLeftInactive) {
             glio.callTopleft(pointX, pointY, callback);
           } else if (isTopRightInactive) {
@@ -65,29 +72,29 @@
      * Functions of each direction
      */
     callTopleft(x, y, callback) => {
-      if (x <= glio.getScreenWidthFragment() && y <= glio.getTopHeight()) {
-        glio.statusTopLeft = 'active';
+      if (x <= glio.getScreenWidthFragment() && (y <= glio.getTopHeight())) {
+        glio.statusTopLeft = ACTIVE;
         callback();
       };
       return glio;
     },
     callTopRight(x, y, callback) => {
-      if (x > glio.getWidthRightValue() && y <= glio.getTopHeight()) {
-        glio.statusTopRight = 'active';
+      if (x > glio.getWidthRightValue() && (y <= glio.getTopHeight())) {
+        glio.statusTopRight = ACTIVE;
         callback();
       };
       return glio;
     },
     callBottomRight(x, y, callback) => {
-      if (x >= glio.getWidthRightValue() && y >= glio.getBottomHeightValue()) {
-        glio.statusBottomRight = 'active';
+      if (x >= glio.getWidthRightValue() && (y >= glio.getBottomHeightValue())) {
+        glio.statusBottomRight = ACTIVE;
         callback();
       };
       return glio;
     },
     callBottomLeft(x, y, callback) => {
-      if (x <= glio.getScreenWidthFragment() && y >= glio.getBottomHeightValue()) {
-        glio.statusBottomLeft = 'active';
+      if (x <= glio.getScreenWidthFragment() && (y >= glio.getBottomHeightValue())) {
+        glio.statusBottomLeft = ACTIVE;
         callback();
       };
       return glio;
@@ -95,5 +102,5 @@
   };
   if (!window.glio) {
     window.glio = glio.$public;
-  };
+  }
 }(window, document, navigator));
