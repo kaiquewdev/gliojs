@@ -15,7 +15,7 @@
     statusBottomRight: 'inactive',
     // public method
     $public: {
-      init(direction, callback) => {
+      init(direction, callback) {
         document.body.addEventListener('mousemove', (event) => {
           let pointX = event.pageX,
               pointY = event.pageY,
@@ -40,59 +40,59 @@
       }
     },
     // the value of top-right screen, for use when user pass the mouse in the area
-    getWidthRightValue() => {
+    getWidthRightValue() {
       let screenWidthFragment = glio.getScreenWidthFragment(),
           topRightValue = (screenWidthFragment * 12) - screenWidthFragment;
       return topRightValue;
     },
     // get the value of top height
-    getTopHeight() => {
+    getTopHeight() {
       let sHeight = 50;
       return sHeight;
     },
     // The value of total screen width are divided in parts
-    getScreenWidthFragment() => {
+    getScreenWidthFragment() {
       let screenWidthFragment = (parseInt(window.innerWidth, 10) / 12);
       return screenWidthFragment;
     },
     // The value of total screen height are divided in parts
-    getScreenHeightFragment() => {
+    getScreenHeightFragment() {
       let screenHeightFragment = (parseInt(window.innerHeight, 10) / 12);
       return screenHeightFragment;
     },
     // the height value of bottom. this value is the same, independent the direction
-    getBottomHeightValue() => {
+    getBottomHeightValue() {
       let screenHeightFragment = glio.getScreenHeightFragment(),
           bottomRightValue = (screenHeightFragment * 12) - screenHeightFragment;
       return bottomRightValue;
     },
     // verify if direction who user is the same of directions who glio have
-    getDirection(directionUser, direction) => directionUser === direction,
+    getDirection(directionUser, direction) directionUser === direction,
     /*
      * Functions of each direction
      */
-    callTopleft(x, y, callback) => {
+    callTopleft(x, y, callback) {
       if (x <= glio.getScreenWidthFragment() && (y <= glio.getTopHeight())) {
         glio.statusTopLeft = ACTIVE;
         callback();
       };
       return glio;
     },
-    callTopRight(x, y, callback) => {
+    callTopRight(x, y, callback) {
       if (x > glio.getWidthRightValue() && (y <= glio.getTopHeight())) {
         glio.statusTopRight = ACTIVE;
         callback();
       };
       return glio;
     },
-    callBottomRight(x, y, callback) => {
+    callBottomRight(x, y, callback) {
       if (x >= glio.getWidthRightValue() && (y >= glio.getBottomHeightValue())) {
         glio.statusBottomRight = ACTIVE;
         callback();
       };
       return glio;
     },
-    callBottomLeft(x, y, callback) => {
+    callBottomLeft(x, y, callback) {
       if (x <= glio.getScreenWidthFragment() && (y >= glio.getBottomHeightValue())) {
         glio.statusBottomLeft = ACTIVE;
         callback();
